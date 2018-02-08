@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -53,7 +53,7 @@
     </div>
 </div>
 
-<div class="container">\
+<div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="starter-template">
@@ -61,16 +61,29 @@
                 <p class="lead">Use this document as a way to quickly start any new project. All you get is this text and a
                     mostly barebones HTML document.</p>
             </div>
-            <form action="" method="post" role="form">
-                <legend>Artist Name</legend>
-
+            <form id="saveArtistForm" th:object="${artist}" method="post" class="text-left">
+                <legend></legend>
                 <div class="form-group">
-                    <label for=""></label>
-                    <input type="text" class="form-control" name="" id="" placeholder="Input..."/>
+                    <label for="name">Add Artist</label>
+                    <input th:type="text" class="form-control" name="name" id="name" placeholder="Enter Artist Name"/>
+                    <small id="nameId" class="text-muted">Add a artist by entering their name...</small>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-th-each="artist: ${artists}">
+                    <td th:text="${artist.getName()}"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div><!-- /.container -->
